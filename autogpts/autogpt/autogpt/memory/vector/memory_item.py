@@ -57,7 +57,7 @@ class MemoryItem(BaseModel, arbitrary_types_allowed=True):
                 else chunk_content(text, config.embedding_model)
             )
         ]
-        logger.debug("Chunks: " + str(chunks))
+        logger.debug("Chunks: %s", str(chunks))
 
         chunk_summaries = [
             summary
@@ -71,7 +71,7 @@ class MemoryItem(BaseModel, arbitrary_types_allowed=True):
                 for text_chunk in chunks
             ]
         ]
-        logger.debug("Chunk summaries: " + str(chunk_summaries))
+        logger.debug("Chunk summaries: %s", str(chunk_summaries))
 
         e_chunks = get_embedding(chunks, config)
 

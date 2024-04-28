@@ -56,10 +56,8 @@ def get_embedding(
     kwargs.update(config.get_openai_credentials(model))
 
     logger.debug(
-        f"Getting embedding{f's for {len(input)} inputs' if multiple else ''}"
-        f" with model '{model}'"
-        + (f" via Azure deployment '{kwargs['engine']}'" if config.use_azure else "")
-    )
+        "%s%s", f"Getting embedding{f's for {len(input)} inputs' if multiple else ''}"
+        f" with model '{model}'", (f" via Azure deployment '{kwargs['engine']}'" if config.use_azure else ""))
 
     embeddings = embedding_provider.create_embedding(
         input,
