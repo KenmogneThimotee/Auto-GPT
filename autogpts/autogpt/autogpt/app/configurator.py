@@ -151,11 +151,11 @@ def create_config(
 
     if allow_downloads:
         print_attribute("Native Downloading", "ENABLED")
-        logger.warn(
+        logger.warning(
             msg=f"{Back.LIGHTYELLOW_EX}AutoGPT will now be able to download and save files to your machine.{Back.RESET}"
             " It is recommended that you monitor any files it downloads carefully.",
         )
-        logger.warn(
+        logger.warning(
             msg=f"{Back.RED + Style.BRIGHT}ALWAYS REMEMBER TO NEVER OPEN FILES YOU AREN'T SURE OF!{Style.RESET_ALL}",
         )
         config.allow_downloads = True
@@ -177,7 +177,7 @@ def check_model(
     if any(model_name in m["id"] for m in models):
         return model_name
 
-    logger.warn(
+    logger.warning(
         f"You do not have access to {model_name}. Setting {model_type} to gpt-3.5-turbo."
     )
     return "gpt-3.5-turbo"

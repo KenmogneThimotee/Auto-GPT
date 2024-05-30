@@ -95,7 +95,7 @@ async def run_auto_gpt(
 
     if config.continuous_mode:
         for line in get_legal_warning().split("\n"):
-            logger.warn(
+            logger.warning(
                 extra={
                     "title": "LEGAL:",
                     "title_color": Fore.RED,
@@ -127,7 +127,7 @@ async def run_auto_gpt(
 
         git_branch = get_current_git_branch()
         if git_branch and git_branch != "stable":
-            logger.warn(
+            logger.warning(
                 f"You are running on `{git_branch}` branch"
                 " - this is not a supported branch."
             )
@@ -314,7 +314,7 @@ async def run_interaction_loop(
                     assistant_reply_dict,
                 ) = await agent.propose_action()
             except InvalidAgentResponseError as e:
-                logger.warn(f"The agent's thoughts could not be parsed: {e}")
+                logger.warning(f"The agent's thoughts could not be parsed: {e}")
                 consecutive_failures += 1
                 if consecutive_failures >= 3:
                     logger.error(
@@ -368,7 +368,7 @@ async def run_interaction_loop(
                     extra={"color": Fore.MAGENTA},
                 )
             elif user_feedback == UserFeedback.EXIT:
-                logger.warn("Exiting...")
+                logger.warning("Exiting...")
                 exit()
             else:  # user_feedback == UserFeedback.TEXT
                 command_name = "human_feedback"
@@ -399,7 +399,7 @@ async def run_interaction_loop(
         if result.status == "success":
             logger.info(result, extra={"title": "SYSTEM:", "title_color": Fore.YELLOW})
         elif result.status == "error":
-            logger.warn(
+            logger.warning(
                 f"Command {command_name} returned an error: {result.error or result.reason}"
             )
 
@@ -483,13 +483,13 @@ async def get_user_feedback(
         if console_input.lower().strip() == config.authorise_key:
             user_feedback = UserFeedback.AUTHORIZE
         elif console_input.lower().strip() == "":
-            logger.warn("Invalid input format.")
+            logger.warning("Invalid input format.")
         elif console_input.lower().startswith(f"{config.authorise_key} -"):
             try:
                 user_feedback = UserFeedback.AUTHORIZE
                 new_cycles_remaining = abs(int(console_input.split(" ")[1]))
             except ValueError:
-                logger.warn(
+                logger.warning(
                     f"Invalid input format. "
                     f"Please enter '{config.authorise_key} -N'"
                     " where N is the number of continuous tasks."

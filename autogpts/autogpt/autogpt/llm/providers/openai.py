@@ -41,7 +41,7 @@ def meter_api(func: T) -> T:
                 response.model,
             )
         except Exception as err:
-            logger.warn(f"Failed to update API costs: {err.__class__.__name__}: {err}")
+            logger.warning(f"Failed to update API costs: {err.__class__.__name__}: {err}")
 
     def metering_wrapper(*args, **kwargs):
         openai_obj = openai_obj_processor(*args, **kwargs)
@@ -103,7 +103,7 @@ def retry_api(
                         raise
 
                     error_msg = error_messages[type(e)]
-                    logger.warn(error_msg)
+                    logger.warning(error_msg)
                     if not user_warned:
                         request_user_double_check(api_key_error_msg)
                         logger.debug(f"Status: {e.http_status}")
@@ -116,7 +116,7 @@ def retry_api(
                         raise
 
                 backoff = backoff_base ** (attempt + 2)
-                logger.warn(backoff_msg.format(backoff=backoff))
+                logger.warning(backoff_msg.format(backoff=backoff))
                 time.sleep(backoff)
 
         return _wrapped

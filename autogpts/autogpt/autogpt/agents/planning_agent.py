@@ -94,7 +94,7 @@ class PlanningAgent(ContextMixin, WorkspaceMixin, BaseAgent):
                 ]
                 for i, cycle in enumerate(self.event_history, 1):
                     if not (cycle.action and cycle.result):
-                        logger.warn(f"Incomplete action in history: {cycle}")
+                        logger.warning(f"Incomplete action in history: {cycle}")
                         continue
 
                     plan_section.append(

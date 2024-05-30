@@ -187,7 +187,7 @@ def ingest_file(
 
         logger.info(f"Ingested {len(file_memory.e_chunks)} chunks from {filename}")
     except Exception as err:
-        logger.warn(f"Error while ingesting file '{filename}': {err}")
+        logger.warning(f"Error while ingesting file '{filename}': {err}")
 
 
 @command(
