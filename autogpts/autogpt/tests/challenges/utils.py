@@ -1,5 +1,4 @@
 import contextlib
-import random
 import shutil
 from pathlib import Path
 from typing import Any, AsyncIterator
@@ -10,13 +9,13 @@ from agbenchmark_config.benchmarks import run_specific_agent
 from autogpt.logs import LogCycleHandler
 from autogpt.workspace import Workspace
 from tests.challenges.schema import Task
+import secrets
 
 
 def generate_noise(noise_size: int) -> str:
-    random.seed(42)
+    secrets.SystemRandom().seed(42)
     return "".join(
-        random.choices(
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+        secrets.SystemRandom().choices("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
             k=noise_size,
         )
     )
