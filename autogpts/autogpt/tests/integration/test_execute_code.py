@@ -1,4 +1,3 @@
-import random
 import string
 import tempfile
 from pathlib import Path
@@ -12,6 +11,7 @@ from autogpt.agents.utils.exceptions import (
     OperationNotAllowedError,
 )
 from autogpt.config import Config
+import secrets
 
 
 @pytest.fixture
@@ -41,7 +41,7 @@ def python_test_args_file(config: Config):
 
 @pytest.fixture
 def random_string():
-    return "".join(random.choice(string.ascii_lowercase) for _ in range(10))
+    return "".join(secrets.choice(string.ascii_lowercase) for _ in range(10))
 
 
 def test_execute_python_file(python_test_file: Path, random_string: str, agent: Agent):
